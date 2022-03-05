@@ -1,0 +1,33 @@
+{
+	"name": "wealth-health",
+	"private": true,
+	"version": "0.0.1",
+	"description": "OpenClassRoomsP14 - Faites passer une librairie jQuery vers React",
+	"repository": "https://github.com/laticauda-64/ybdlassablere_14_05032022",
+	"author": "Yoann BDL",
+	"license": "MIT",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"dependencies": {
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-react": "^1.0.7",
+		"eslint": "^8.10.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-react": "^7.29.3",
+		"prettier": "^2.5.1",
+		"vite": "^2.8.0"
+	}
+}
