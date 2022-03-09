@@ -4,13 +4,20 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import Autocomplete from "@mui/material/Autocomplete";
 import { DatePicker } from "@mui/lab";
-import getStates from "../service/listOfAmericanStates";
-import getDepartment from "../service/listOfCompanyDepartments";
+import getStates from "../../service/listOfAmericanStates";
+import getDepartment from "../../service/listOfCompanyDepartments";
 import Box from "@mui/material/Box";
 
 export default function CreateEmployeeForm() {
+	/**
+	 * Mocked Data
+	 */
 	const americanStates = getStates();
 	const companyDepartments = getDepartment();
+
+	/**
+	 * Store
+	 */
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns}>

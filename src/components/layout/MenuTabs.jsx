@@ -4,7 +4,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import CreateEmployeeForm from "../../pages/CreateEmployeeForm";
+import CreateEmployeeForm from "./CreateEmployeeForm";
+import EmployeesList from "./EmployeesList";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -52,7 +53,7 @@ export default function MenuTabs() {
 				<CreateEmployeeForm />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				Item Two
+				<EmployeesList />
 			</TabPanel>
 		</Box>
 	);
