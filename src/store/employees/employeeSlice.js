@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
-import getEmployees from "../../service/mockEmployees";
+import { getEmployees } from "../../service/employeeService";
 
 const employeesAdapter = createEntityAdapter();
 
