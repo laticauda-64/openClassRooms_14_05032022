@@ -23,7 +23,7 @@ export default function Select(props) {
 			onChange={(event) => {
 				onChange(convertToDefEventPara(name, event.target.textContent));
 			}}
-			renderInput={(params) => <TextField {...params} label={label} required />}
+			renderInput={(params) => <TextField {...params} label={label} />}
 		/>
 	);
 }

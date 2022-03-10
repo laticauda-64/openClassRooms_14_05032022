@@ -23,7 +23,7 @@ export default function DateInput(props) {
 				label={label}
 				value={value}
 				onChange={(date) => onChange(convertToDefEventPara(name, Date.parse(date)))}
-				renderInput={(params) => <TextField fullWidth required variant="outlined" {...params} />}
+				renderInput={(params) => <TextField fullWidth variant="outlined" {...params} />}
 			/>
 		</LocalizationProvider>
 	);
