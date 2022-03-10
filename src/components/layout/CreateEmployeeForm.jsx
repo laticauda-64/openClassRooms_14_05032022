@@ -80,12 +80,8 @@ export default function CreateEmployeeForm() {
 					textAlign: "right",
 					padding: "15px",
 				}}>
-				<Button sx={{ width: 100, marginRight: 2 }} variant="contained">
-					Save
-				</Button>
-				<Button sx={{ width: 100 }} variant="outlined">
-					Reset
-				</Button>
+				<Button text="Save" />
+				<Button text="Reset" variant="outlined" />
 			</Box>
 		</Form>
 	);
