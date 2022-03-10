@@ -1,37 +1,46 @@
-import { Button, FormLabel } from "@mui/material";
+import { FormLabel } from "@mui/material";
 import Input from "../controls/Input";
 import DateInput from "../controls/DateInput";
 import Select from "../controls/Select";
+import Button from "../controls/Button";
 import { getStates, getDepartments } from "../../service/employeeService";
 import Box from "@mui/material/Box";
-import { useState } from "react";
-import { Form } from "../useForm";
+import { Form, useForm } from "../useForm";
+
+/**
+ * Initial form values
+ */
+
+const initialValues = {
+	firstName: "",
+	lastName: "",
+	birthDate: null,
+	adress: "",
+	city: "",
+	state: null,
+	zip: "",
+	startDate: null,
+	department: null,
+};
 
 export default function CreateEmployeeForm() {
 	/**
 	 * Form states & functions
 	 */
-	const initialFormValues = {
-		firstName: "",
-		lastName: "",
-		birthDate: null,
-		adress: "",
-		city: "",
-		state: null,
-		zip: "",
-		startDate: null,
-		department: null,
-	};
-	const [formValues, setFormValues] = useState(initialFormValues);
 
-	const handleInputChange = (e) => {
-		let { name, value } = e.target;
-
-		setFormValues({
-			...formValues,
-			[name]: value,
+	const validate = (fieldValues = values) => {
+		let temp = { ...errors };
+		if ("firstName" in fieldValues) temp.firstName = fieldValues.firstName ? "" : "This field is required.";
+		if ("lastName" in fieldValues) temp.lastName = fieldValues.lastName ? "" : "This field is required.";
+		// if ("departmentId" in fieldValues) temp.departmentId = fieldValues.departmentId.length != 0 ? "" : "This field is required.";
+		setErrors({
+			...temp,
 		});
+
+		if (fieldValues == values) return Object.values(temp).every((x) => x == "");
 	};
+
+	const { values, errors, setErrors, handleInputChange, resetForm } = useForm(initialValues, true, validate);
 
 	/**
 	 * Store
@@ -47,9 +56,9 @@ export default function CreateEmployeeForm() {
 						width: "50%",
 					}}>
 					<FormLabel component="legend">Identity :</FormLabel>
-					<Input label="First Name" name="firstName" onChange={handleInputChange} value={formValues.firstName} />
-					<Input label="Last Name" name="lastName" onChange={handleInputChange} value={formValues.lastName} />
-					<DateInput name="birthDate" label="Date of Birth" value={formValues.birthDate} onChange={handleInputChange} />
+					<Input label="First Name" name="firstName" onChange={handleInputChange} value={values.firstName} />
+					<Input label="Last Name" name="lastName" onChange={handleInputChange} value={values.lastName} />
+					<DateInput name="birthDate" label="Date of Birth" value={values.birthDate} onChange={handleInputChange} />
 				</Box>
 
 				<Box
@@ -58,10 +67,10 @@ export default function CreateEmployeeForm() {
 						width: "50%",
 					}}>
 					<FormLabel component="legend">Address :</FormLabel>
-					<Input label="Street" name="adress" onChange={handleInputChange} value={formValues.adress} />
-					<Input label="City" name="city" onChange={handleInputChange} value={formValues.city} />
-					<Select name="state" label="State" value={formValues.state} onChange={handleInputChange} options={getStates()} />
-					<Input label="Zip Code" name="zip" onChange={handleInputChange} value={formValues.zip} />
+					<Input label="Street" name="adress" onChange={handleInputChange} value={values.adress} />
+					<Input label="City" name="city" onChange={handleInputChange} value={values.city} />
+					<Select name="state" label="State" value={values.state} onChange={handleInputChange} options={getStates()} />
+					<Input label="Zip Code" name="zip" onChange={handleInputChange} value={values.zip} />
 				</Box>
 			</div>
 			<Box
@@ -72,8 +81,8 @@ export default function CreateEmployeeForm() {
 				<FormLabel sx={{ marginBottom: "10px" }} component="legend">
 					Company Status :
 				</FormLabel>
-				<DateInput name="startDate" label="Start Date" value={formValues.startDate} onChange={handleInputChange} />
-				<Select name="department" label="Department" value={formValues.department} onChange={handleInputChange} options={getDepartments()} />
+				<DateInput name="startDate" label="Start Date" value={values.startDate} onChange={handleInputChange} />
+				<Select name="department" label="Department" value={values.department} onChange={handleInputChange} options={getDepartments()} />
 			</Box>
 			<Box
 				sx={{
@@ -81,7 +90,7 @@ export default function CreateEmployeeForm() {
 					padding: "15px",
 				}}>
 				<Button text="Save" />
-				<Button text="Reset" variant="outlined" />
+				<Button text="Reset" variant="outlined" onClick={resetForm} />
 			</Box>
 		</Form>
 	);
