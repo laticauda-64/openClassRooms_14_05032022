@@ -2,10 +2,10 @@ import { Button, FormLabel } from "@mui/material";
 import Input from "../controls/Input";
 import DateInput from "../controls/DateInput";
 import Select from "../controls/Select";
-import { styled } from "@mui/material";
 import { getStates, getDepartments } from "../../service/employeeService";
 import Box from "@mui/material/Box";
 import { useState } from "react";
+import { Form } from "../useForm";
 
 export default function CreateEmployeeForm() {
 	/**
@@ -39,7 +39,7 @@ export default function CreateEmployeeForm() {
 	// Dispatch some actions here
 
 	return (
-		<EmployeeForm autoComplete="off">
+		<Form>
 			<div className="topBox">
 				<Box
 					sx={{
@@ -87,16 +87,6 @@ export default function CreateEmployeeForm() {
 					Reset
 				</Button>
 			</Box>
-		</EmployeeForm>
+		</Form>
 	);
 }
-
-const EmployeeForm = styled("form")`
-	.topBox {
-		display: flex;
-	}
-
-	.MuiFormControl-root {
-		margin: 10px 0;
-	}
-`;
