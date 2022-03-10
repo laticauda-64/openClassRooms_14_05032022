@@ -35,7 +35,8 @@ export default function CreateEmployeeForm() {
 		if ("adress" in fieldValues) temp.adress = fieldValues.adress ? "" : "This field is required.";
 		if ("city" in fieldValues) temp.city = fieldValues.city ? "" : "This field is required.";
 		if ("zip" in fieldValues) temp.zip = /^\d{5}$/g.test(fieldValues.zip) ? "" : "Zip code must contain 5 numbers.";
-		// if ("departmentId" in fieldValues) temp.departmentId = fieldValues.departmentId.length != 0 ? "" : "This field is required.";
+		if ("birthDate" in fieldValues) temp.birthDate = fieldValues.birthDate !== null ? "" : "This field is required.";
+		if ("startDate" in fieldValues) temp.startDate = fieldValues.startDate !== null ? "" : "This field is required.";
 		// Ajouter les validations suivantes :
 		// - zip Code : uniquement des chiffres, non vide
 		// - tous les autres champs : pas vides
@@ -71,7 +72,14 @@ export default function CreateEmployeeForm() {
 					<FormLabel component="legend">Identity :</FormLabel>
 					<Input label="First Name" name="firstName" onChange={handleInputChange} value={values.firstName} error={errors.firstName} />
 					<Input label="Last Name" name="lastName" onChange={handleInputChange} value={values.lastName} error={errors.lastName} />
-					<DateInput name="birthDate" label="Date of Birth" value={values.birthDate} onChange={handleInputChange} />
+					<DateInput
+						name="birthDate"
+						label="Date of Birth"
+						disableFuture
+						value={values.birthDate}
+						onChange={handleInputChange}
+						error={errors.birthDate}
+					/>
 				</Box>
 
 				<Box
@@ -94,7 +102,7 @@ export default function CreateEmployeeForm() {
 				<FormLabel sx={{ marginBottom: "10px" }} component="legend">
 					Company Status :
 				</FormLabel>
-				<DateInput name="startDate" label="Start Date" value={values.startDate} onChange={handleInputChange} />
+				<DateInput name="startDate" label="Start Date" value={values.startDate} onChange={handleInputChange} error={errors.startDate} />
 				<Select name="department" label="Department" value={values.department} onChange={handleInputChange} options={getDepartments()} />
 			</Box>
 			<Box
