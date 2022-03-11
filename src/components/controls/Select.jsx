@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from "@mui/material";
 
 export default function Select(props) {
-	const { name, label, value, onChange, options } = props;
+	const { name, label, value, onChange, options, error = null } = props;
 
 	/**
 	 * Adapter pattern
@@ -23,7 +23,7 @@ export default function Select(props) {
 			onChange={(event) => {
 				onChange(convertToDefEventPara(name, event.target.textContent));
 			}}
-			renderInput={(params) => <TextField {...params} label={label} />}
+			renderInput={(params) => <TextField {...params} {...(error && { error: true, helperText: error })} label={label} />}
 		/>
 	);
 }

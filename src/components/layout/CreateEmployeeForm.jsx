@@ -37,6 +37,9 @@ export default function CreateEmployeeForm() {
 		if ("zip" in fieldValues) temp.zip = /^\d{5}$/g.test(fieldValues.zip) ? "" : "Zip code must contain 5 numbers.";
 		if ("birthDate" in fieldValues) temp.birthDate = fieldValues.birthDate !== null ? "" : "This field is required.";
 		if ("startDate" in fieldValues) temp.startDate = fieldValues.startDate !== null ? "" : "This field is required.";
+		if ("state" in fieldValues) temp.state = fieldValues.state !== null ? "" : "This field is required.";
+		if ("department" in fieldValues) temp.department = fieldValues.department !== null ? "" : "This field is required.";
+
 		// Ajouter les validations suivantes :
 		// - zip Code : uniquement des chiffres, non vide
 		// - tous les autres champs : pas vides
@@ -90,7 +93,7 @@ export default function CreateEmployeeForm() {
 					<FormLabel component="legend">Address :</FormLabel>
 					<Input label="Street" name="adress" onChange={handleInputChange} value={values.adress} error={errors.adress} />
 					<Input label="City" name="city" onChange={handleInputChange} value={values.city} error={errors.city} />
-					<Select name="state" label="State" value={values.state} onChange={handleInputChange} options={getStates()} />
+					<Select name="state" label="State" value={values.state} onChange={handleInputChange} options={getStates()} error={errors.state} />
 					<Input label="Zip Code" name="zip" onChange={handleInputChange} value={values.zip} error={errors.zip} />
 				</Box>
 			</div>
@@ -103,7 +106,14 @@ export default function CreateEmployeeForm() {
 					Company Status :
 				</FormLabel>
 				<DateInput name="startDate" label="Start Date" value={values.startDate} onChange={handleInputChange} error={errors.startDate} />
-				<Select name="department" label="Department" value={values.department} onChange={handleInputChange} options={getDepartments()} />
+				<Select
+					name="department"
+					label="Department"
+					value={values.department}
+					onChange={handleInputChange}
+					options={getDepartments()}
+					error={errors.department}
+				/>
 			</Box>
 			<Box
 				sx={{
