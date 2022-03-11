@@ -6,6 +6,10 @@ import Button from "../controls/Button";
 import { getStates, getDepartments } from "../../service/employeeService";
 import Box from "@mui/material/Box";
 import { Form, useForm } from "../useForm";
+import { useDispatch } from "react-redux";
+import { AddEmployee } from "../../store/employees/employeeSlice";
+import { employeeSelector } from "../../store/employees/employeeSlice";
+import store from "../../store/store";
 
 /**
  * Initial form values
@@ -28,6 +32,11 @@ export default function CreateEmployeeForm() {
 	 * Form states & functions
 	 */
 
+	/**
+	 * Validate fields in real time (onChange) and on form submit (onSubmit)
+	 * @param {*} fieldValues
+	 * @returns void || bool
+	 */
 	const validate = (fieldValues = values) => {
 		let temp = { ...errors };
 		if ("firstName" in fieldValues) temp.firstName = fieldValues.firstName ? "" : "This field is required.";
@@ -40,13 +49,10 @@ export default function CreateEmployeeForm() {
 		if ("state" in fieldValues) temp.state = fieldValues.state !== null ? "" : "This field is required.";
 		if ("department" in fieldValues) temp.department = fieldValues.department !== null ? "" : "This field is required.";
 
-		// Ajouter les validations suivantes :
-		// - zip Code : uniquement des chiffres, non vide
-		// - tous les autres champs : pas vides
 		setErrors({
 			...temp,
 		});
-
+		// Used to validate each field when form is submitted
 		if (fieldValues == values) return Object.values(temp).every((x) => x == "");
 	};
 
@@ -54,15 +60,35 @@ export default function CreateEmployeeForm() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		/**
+		 * If form is valid, dispatch current form state (values) in the store
+		 */
 		if (validate()) {
-			console.log("Formulaire soumis !");
+			dispatch(
+				AddEmployee({
+					id: lastIndex + 1,
+					private: {
+						firstName: values.firstName,
+						lastName: values.lastName,
+						birthDate: values.birthDate,
+						street: values.adress,
+						city: values.city,
+						state: values.state,
+						zip: values.zip,
+					},
+					company: { startDate: values.startDate, department: values.department },
+				})
+			);
+			resetForm();
 		}
 	};
 
 	/**
 	 * Store
 	 */
-	// Dispatch some actions here
+	const lastIndex = Math.max(...employeeSelector.selectIds(store.getState()));
+	const dispatch = useDispatch();
 
 	return (
 		<Form onSubmit={handleSubmit}>
