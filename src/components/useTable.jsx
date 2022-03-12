@@ -1,4 +1,21 @@
-import { Table, TableHead, TableRow, TableCell, TablePagination, TableSortLabel } from "@material-ui/core";
+/**
+ *
+ * Reusable tables component: the aim is to split apart the logic of the table component in order
+ * to avoid ending with a too big main 'table display' component
+ *
+ */
+
+import {
+	Table as MuiTable,
+	TableHead,
+	TableRow,
+	TableCell,
+	TablePagination,
+	TableSortLabel,
+	TableContainer,
+	tableCellClasses,
+	styled,
+} from "@mui/material";
 import { useState } from "react";
 
 export default function useTable(records, headCells, filterFn) {
@@ -8,7 +25,10 @@ export default function useTable(records, headCells, filterFn) {
 	const [order, setOrder] = useState();
 	const [orderBy, setOrderBy] = useState();
 
-	const TblContainer = (props) => <Table>{props.children}</Table>;
+	const Table = (props) => {
+		const { children, ...others } = props;
+		return <MuiTable {...others}>{children}</MuiTable>;
+	};
 
 	const TblHead = (props) => {
 		const handleSortRequest = (cellId) => {
@@ -21,7 +41,7 @@ export default function useTable(records, headCells, filterFn) {
 			<TableHead>
 				<TableRow>
 					{headCells.map((headCell) => (
-						<TableCell key={headCell.id} sortDirection={orderBy === headCell.id ? order : false}>
+						<StyledTableCell key={headCell.id} sortDirection={orderBy === headCell.id ? order : false}>
 							{headCell.disableSorting ? (
 								headCell.label
 							) : (
@@ -34,7 +54,7 @@ export default function useTable(records, headCells, filterFn) {
 									{headCell.label}
 								</TableSortLabel>
 							)}
-						</TableCell>
+						</StyledTableCell>
 					))}
 				</TableRow>
 			</TableHead>
@@ -57,8 +77,8 @@ export default function useTable(records, headCells, filterFn) {
 			rowsPerPageOptions={pages}
 			rowsPerPage={rowsPerPage}
 			count={records.length}
-			onChangePage={handleChangePage}
-			onChangeRowsPerPage={handleChangeRowsPerPage}
+			onPageChange={handleChangePage}
+			onRowsPerPageChange={handleChangeRowsPerPage}
 		/>
 	);
 
@@ -91,9 +111,22 @@ export default function useTable(records, headCells, filterFn) {
 	};
 
 	return {
-		TblContainer,
+		TableContainer,
+		Table,
 		TblHead,
 		TblPagination,
 		recordsAfterPagingAndSorting,
 	};
 }
+
+/**
+ * Styled components
+ */
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+	[`&.${tableCellClasses.head}`]: {
+		backgroundColor: "#eaeddc",
+		color: theme.palette.primary.dark,
+		whiteSpace: "nowrap",
+	},
+}));
