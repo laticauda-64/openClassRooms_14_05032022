@@ -1,55 +1,77 @@
 import { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import store from "../../store/store";
 import { employeeSelector } from "../../store/employees/employeeSlice";
+import { styled } from "@mui/material";
 
 export default function EmployeesList() {
 	const allEmployees = employeeSelector.selectAll(store.getState());
 
-	useEffect(() => {
-		console.log("Employees List :");
-		console.log(allEmployees);
-	}, []);
+	useEffect(() => {}, []);
 
 	return (
-		<TableContainer>
+		<TableContainer sx={{ borderRadius: 2 }}>
 			<Table aria-label="Employees List">
 				<TableHead>
 					<TableRow>
-						<TableCell>First Name</TableCell>
-						<TableCell>Last Name</TableCell>
-						<TableCell>Start Date</TableCell>
-						<TableCell>Departement</TableCell>
-						<TableCell>Date of Birth</TableCell>
-						<TableCell>Street</TableCell>
-						<TableCell>City</TableCell>
-						<TableCell>State</TableCell>
-						<TableCell>Zip Code</TableCell>
+						<StyledTableCell>First Name</StyledTableCell>
+						<StyledTableCell>Last Name</StyledTableCell>
+						<StyledTableCell>Start Date</StyledTableCell>
+						<StyledTableCell>Departement</StyledTableCell>
+						<StyledTableCell>Date of Birth</StyledTableCell>
+						<StyledTableCell>Street</StyledTableCell>
+						<StyledTableCell>City</StyledTableCell>
+						<StyledTableCell>State</StyledTableCell>
+						<StyledTableCell>Zip Code</StyledTableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{allEmployees.map((employee) => (
-						<TableRow key={employee.id}>
-							<TableCell component="th" scope="row">
+						<StyledTableRow key={employee.id}>
+							<StyledBodyTableCell component="th" scope="row">
 								{employee.private.firstName}
-							</TableCell>
-							<TableCell>{employee.private.lastName}</TableCell>
-							<TableCell>{new Date(employee.company.startDate).toLocaleDateString()}</TableCell>
-							<TableCell>{employee.company.department}</TableCell>
-							<TableCell>{new Date(employee.private.birthDate).toLocaleDateString()}</TableCell>
-							<TableCell>{employee.private.street}</TableCell>
-							<TableCell>{employee.private.city}</TableCell>
-							<TableCell>{employee.private.state}</TableCell>
-							<TableCell>{employee.private.zip}</TableCell>
-						</TableRow>
+							</StyledBodyTableCell>
+							<StyledBodyTableCell>{employee.private.lastName}</StyledBodyTableCell>
+							<StyledBodyTableCell>{new Date(employee.company.startDate).toLocaleDateString()}</StyledBodyTableCell>
+							<StyledBodyTableCell>{employee.company.department}</StyledBodyTableCell>
+							<StyledBodyTableCell>{new Date(employee.private.birthDate).toLocaleDateString()}</StyledBodyTableCell>
+							<StyledBodyTableCell>{employee.private.street}</StyledBodyTableCell>
+							<StyledBodyTableCell>{employee.private.city}</StyledBodyTableCell>
+							<StyledBodyTableCell>{employee.private.state}</StyledBodyTableCell>
+							<StyledBodyTableCell>{employee.private.zip}</StyledBodyTableCell>
+						</StyledTableRow>
 					))}
 				</TableBody>
 			</Table>
 		</TableContainer>
 	);
 }
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+	[`&.${tableCellClasses.head}`]: {
+		backgroundColor: "#eaeddc",
+		color: theme.palette.primary.dark,
+		whiteSpace: "nowrap",
+	},
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+	"&:nth-of-type(odd)": {
+		backgroundColor: theme.palette.action.hover,
+	},
+	// hide last border
+	"&:last-child td, &:last-child th": {
+		border: 0,
+	},
+}));
+
+const StyledBodyTableCell = styled(TableCell)(({ theme }) => ({
+	[`&.${tableCellClasses.body}`]: {
+		whiteSpace: "wrap",
+	},
+}));
