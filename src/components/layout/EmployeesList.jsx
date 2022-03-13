@@ -16,10 +16,10 @@ const headCells = [
 	{ id: "company.startDate", label: "Start Date" },
 	{ id: "company.department", label: "Department" },
 	{ id: "private.birthDate", label: "Date of Birth" },
-	{ id: "employee.private.street", label: "Street" },
-	{ id: "employee.private.city", label: "City" },
-	{ id: "employee.private.state", label: "State" },
-	{ id: "employee.private.zip", label: "Zip Code" },
+	{ id: "private.street", label: "Street" },
+	{ id: "private.city", label: "City" },
+	{ id: "private.state", label: "State" },
+	{ id: "private.zip", label: "Zip Code" },
 ];
 
 export default function EmployeesList() {

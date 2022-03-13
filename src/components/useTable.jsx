@@ -40,22 +40,24 @@ export default function useTable(records, headCells, filterFn) {
 		return (
 			<TableHead>
 				<TableRow>
-					{headCells.map((headCell) => (
-						<StyledTableCell key={headCell.id} sortDirection={orderBy === headCell.id ? order : false}>
-							{headCell.disableSorting ? (
-								headCell.label
-							) : (
-								<TableSortLabel
-									active={orderBy === headCell.id}
-									direction={orderBy === headCell.id ? order : "asc"}
-									onClick={() => {
-										handleSortRequest(headCell.id);
-									}}>
-									{headCell.label}
-								</TableSortLabel>
-							)}
-						</StyledTableCell>
-					))}
+					{headCells.map((headCell) => {
+						return (
+							<StyledTableCell key={headCell.id} sortDirection={orderBy === headCell.id ? order : false}>
+								{headCell.disableSorting ? (
+									headCell.label
+								) : (
+									<TableSortLabel
+										active={orderBy === headCell.id}
+										direction={orderBy === headCell.id ? order : "asc"}
+										onClick={() => {
+											handleSortRequest(headCell.id);
+										}}>
+										{headCell.label}
+									</TableSortLabel>
+								)}
+							</StyledTableCell>
+						);
+					})}
 				</TableRow>
 			</TableHead>
 		);
@@ -97,10 +99,17 @@ export default function useTable(records, headCells, filterFn) {
 	}
 
 	function descendingComparator(a, b, orderBy) {
-		if (b[orderBy] < a[orderBy]) {
+		/**
+		 * Custom function adaptater to make it works with nested prop objects.
+		 * Ex: ["private"]["firstName"]
+		 */
+		if (!orderBy) return 0;
+		const [firstObjProp, secondObjProp] = orderBy.split(".");
+
+		if (b[firstObjProp][secondObjProp] < a[firstObjProp][secondObjProp]) {
 			return -1;
 		}
-		if (b[orderBy] > a[orderBy]) {
+		if (b[firstObjProp][secondObjProp] > a[firstObjProp][secondObjProp]) {
 			return 1;
 		}
 		return 0;
