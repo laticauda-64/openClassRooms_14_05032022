@@ -101,7 +101,7 @@ export const getEmployees = () => [
 		},
 		company: {
 			startDate: 1616367600000,
-			department: "SALES",
+			department: "Sales",
 		},
 	},
 	{
@@ -109,15 +109,15 @@ export const getEmployees = () => [
 		private: {
 			firstName: "Patrick",
 			lastName: "Chaun",
-			birthDate: 457653600000,
+			birthDate: 630111600000,
 			street: "65 las vegas boulevard",
 			city: "Las Vegas",
 			state: "Nevada",
 			zip: "88901",
 		},
 		company: {
-			startDate: 1616367600000,
-			department: "SALES",
+			startDate: 1627250400000,
+			department: "Marketing",
 		},
 	},
 	{
@@ -125,15 +125,47 @@ export const getEmployees = () => [
 		private: {
 			firstName: "Delphine",
 			lastName: "Doe",
-			birthDate: 457653600000,
+			birthDate: 673394400000,
 			street: "3 Beale Street",
 			city: "Memphis",
 			state: "Tennesse",
 			zip: "37501",
 		},
 		company: {
-			startDate: 1616367600000,
-			department: "SALES",
+			startDate: 1546470000000,
+			department: "Engineering",
+		},
+	},
+	{
+		id: 4,
+		private: {
+			firstName: "Augustin",
+			lastName: "Banjo",
+			birthDate: 499647600000,
+			street: "931 Thomas Jefferson Parkway,",
+			city: "Charlottesville",
+			state: "Virginia",
+			zip: "22902",
+		},
+		company: {
+			startDate: 1535752800000,
+			department: "Human Resources",
+		},
+	},
+	{
+		id: 5,
+		private: {
+			firstName: "Catherine",
+			lastName: "Manson",
+			birthDate: 261266400000,
+			street: "10236 Charing Cross Rd",
+			city: "Los Angeles",
+			state: "California",
+			zip: "90024",
+		},
+		company: {
+			startDate: 1647298800000,
+			department: "Legal",
 		},
 	},
 ];
