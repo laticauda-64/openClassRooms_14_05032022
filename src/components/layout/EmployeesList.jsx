@@ -3,9 +3,11 @@ import useTable from "../useTable";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
+import Input from "../controls/Input";
 import store from "../../store/store";
 import { employeeSelector } from "../../store/employees/employeeSlice";
-import { styled } from "@mui/material";
+import { InputAdornment, styled, Toolbar } from "@mui/material";
+import { Search } from "@mui/icons-material";
 
 /**
  * Titles for the employees table
@@ -45,6 +47,18 @@ export default function EmployeesList() {
 
 	return (
 		<>
+			<CustomToolbar>
+				<Input
+					label="Search Employees"
+					InputProps={{
+						startAdornment: (
+							<InputAdornment position="start">
+								<Search />
+							</InputAdornment>
+						),
+					}}
+				/>
+			</CustomToolbar>
 			<TableContainer sx={{ borderRadius: 2 }}>
 				<Table aria-label="Employees List">
 					<TblHead />
@@ -90,4 +104,12 @@ const StyledBodyTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.body}`]: {
 		whiteSpace: "wrap",
 	},
+}));
+
+const CustomToolbar = styled(Toolbar)(({ theme }) => ({
+	paddingTop: "20px",
+	paddingBottom: "20px",
+	paddingLeft: 0,
+	paddingRight: 0,
+	width: "50%",
 }));
