@@ -31,7 +31,7 @@ export default function EmployeesList() {
 	const allEmployees = employeeSelector.selectAll(store.getState());
 
 	/**
-	 * Component states
+	 * Component states & functions
 	 */
 	const [records, setRecords] = useState(allEmployees);
 	const [filterFn, setFilterFn] = useState({
@@ -39,6 +39,17 @@ export default function EmployeesList() {
 			return items;
 		},
 	});
+
+	const handleSearch = (e) => {
+		let target = e.target;
+		setFilterFn({
+			fn: (items) => {
+				console.log(items);
+				if (target.value == "") return items;
+				else return items.filter((x) => x.private.firstName.toLowerCase().includes(target.value));
+			},
+		});
+	};
 
 	/**
 	 * States & functions from useTable reusable component
@@ -57,6 +68,7 @@ export default function EmployeesList() {
 							</InputAdornment>
 						),
 					}}
+					onChange={handleSearch}
 				/>
 			</CustomToolbar>
 			<TableContainer sx={{ borderRadius: 2 }}>
