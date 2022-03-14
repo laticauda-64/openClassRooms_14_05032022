@@ -44,9 +44,18 @@ export default function EmployeesList() {
 		let target = e.target;
 		setFilterFn({
 			fn: (items) => {
-				console.log(items);
 				if (target.value == "") return items;
-				else return items.filter((x) => x.private.firstName.toLowerCase().includes(target.value));
+				else
+					return items.filter(
+						(x) =>
+							x.private.firstName.toLowerCase().includes(target.value) ||
+							x.private.lastName.toLowerCase().includes(target.value) ||
+							x.private.street.toLowerCase().includes(target.value) ||
+							x.private.city.toLowerCase().includes(target.value) ||
+							x.private.state.toLowerCase().includes(target.value) ||
+							x.private.zip.toLowerCase().includes(target.value) ||
+							x.company.department.toLowerCase().includes(target.value)
+					);
 			},
 		});
 	};
