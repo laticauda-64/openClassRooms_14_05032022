@@ -44,7 +44,6 @@ export default function EmployeesList() {
 		let target = e.target.value.toLowerCase();
 		setFilterFn({
 			fn: (items) => {
-				console.log(items);
 				if (target == "") return items;
 				else
 					return items.filter(
