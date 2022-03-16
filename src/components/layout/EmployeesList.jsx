@@ -41,20 +41,21 @@ export default function EmployeesList() {
 	});
 
 	const handleSearch = (e) => {
-		let target = e.target;
+		let target = e.target.value.toLowerCase();
 		setFilterFn({
 			fn: (items) => {
-				if (target.value == "") return items;
+				console.log(items);
+				if (target == "") return items;
 				else
 					return items.filter(
 						(x) =>
-							x.private.firstName.toLowerCase().includes(target.value) ||
-							x.private.lastName.toLowerCase().includes(target.value) ||
-							x.private.street.toLowerCase().includes(target.value) ||
-							x.private.city.toLowerCase().includes(target.value) ||
-							x.private.state.toLowerCase().includes(target.value) ||
-							x.private.zip.toLowerCase().includes(target.value) ||
-							x.company.department.toLowerCase().includes(target.value)
+							x.private.firstName.toLowerCase().includes(target) ||
+							x.private.lastName.toLowerCase().includes(target) ||
+							x.private.street.toLowerCase().includes(target) ||
+							x.private.city.toLowerCase().includes(target) ||
+							x.private.state.toLowerCase().includes(target) ||
+							x.private.zip.toLowerCase().includes(target) ||
+							x.company.department.toLowerCase().includes(target)
 					);
 			},
 		});
