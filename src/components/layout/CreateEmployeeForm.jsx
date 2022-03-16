@@ -5,11 +5,13 @@ import Select from "../controls/Select";
 import Button from "../controls/Button";
 import { getStates, getDepartments } from "../../service/employeeService";
 import Box from "@mui/material/Box";
+import Modal from "p14-modal-component";
 import { Form, useForm } from "../useForm";
 import { useDispatch } from "react-redux";
 import { AddEmployee } from "../../store/employees/employeeSlice";
 import { employeeSelector } from "../../store/employees/employeeSlice";
 import store from "../../store/store";
+import { useState } from "react";
 
 /**
  * Initial form values
@@ -81,8 +83,11 @@ export default function CreateEmployeeForm() {
 				})
 			);
 			resetForm();
+			setShowModal(true);
 		}
 	};
+
+	const [showModal, setShowModal] = useState(false);
 
 	/**
 	 * Store
@@ -91,64 +96,76 @@ export default function CreateEmployeeForm() {
 	const dispatch = useDispatch();
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<div className="topBox">
+		<>
+			<Form onSubmit={handleSubmit}>
+				<div className="topBox">
+					<Box
+						sx={{
+							padding: "0 8px",
+							width: "50%",
+						}}>
+						<FormLabel component="legend">Identity :</FormLabel>
+						<Input label="First Name" name="firstName" onChange={handleInputChange} value={values.firstName} error={errors.firstName} />
+						<Input label="Last Name" name="lastName" onChange={handleInputChange} value={values.lastName} error={errors.lastName} />
+						<DateInput
+							name="birthDate"
+							label="Date of Birth"
+							disableFuture
+							value={values.birthDate}
+							onChange={handleInputChange}
+							error={errors.birthDate}
+						/>
+					</Box>
+
+					<Box
+						sx={{
+							padding: "0 8px",
+							width: "50%",
+						}}>
+						<FormLabel component="legend">Address :</FormLabel>
+						<Input label="Street" name="adress" onChange={handleInputChange} value={values.adress} error={errors.adress} />
+						<Input label="City" name="city" onChange={handleInputChange} value={values.city} error={errors.city} />
+						<Select
+							name="state"
+							label="State"
+							value={values.state}
+							onChange={handleInputChange}
+							options={getStates()}
+							error={errors.state}
+						/>
+						<Input label="Zip Code" name="zip" onChange={handleInputChange} value={values.zip} error={errors.zip} />
+					</Box>
+				</div>
 				<Box
 					sx={{
-						padding: "0 8px",
-						width: "50%",
+						padding: "0 15px",
+						marginTop: "25px",
 					}}>
-					<FormLabel component="legend">Identity :</FormLabel>
-					<Input label="First Name" name="firstName" onChange={handleInputChange} value={values.firstName} error={errors.firstName} />
-					<Input label="Last Name" name="lastName" onChange={handleInputChange} value={values.lastName} error={errors.lastName} />
-					<DateInput
-						name="birthDate"
-						label="Date of Birth"
-						disableFuture
-						value={values.birthDate}
+					<FormLabel sx={{ marginBottom: "10px" }} component="legend">
+						Company Status :
+					</FormLabel>
+					<DateInput name="startDate" label="Start Date" value={values.startDate} onChange={handleInputChange} error={errors.startDate} />
+					<Select
+						name="department"
+						label="Department"
+						value={values.department}
 						onChange={handleInputChange}
-						error={errors.birthDate}
+						options={getDepartments()}
+						error={errors.department}
 					/>
 				</Box>
-
 				<Box
 					sx={{
-						padding: "0 8px",
-						width: "50%",
+						textAlign: "right",
+						padding: "15px",
 					}}>
-					<FormLabel component="legend">Address :</FormLabel>
-					<Input label="Street" name="adress" onChange={handleInputChange} value={values.adress} error={errors.adress} />
-					<Input label="City" name="city" onChange={handleInputChange} value={values.city} error={errors.city} />
-					<Select name="state" label="State" value={values.state} onChange={handleInputChange} options={getStates()} error={errors.state} />
-					<Input label="Zip Code" name="zip" onChange={handleInputChange} value={values.zip} error={errors.zip} />
+					<Button text="Save" type="submit" />
+					<Button text="Reset" variant="outlined" onClick={resetForm} />
 				</Box>
-			</div>
-			<Box
-				sx={{
-					padding: "0 15px",
-					marginTop: "25px",
-				}}>
-				<FormLabel sx={{ marginBottom: "10px" }} component="legend">
-					Company Status :
-				</FormLabel>
-				<DateInput name="startDate" label="Start Date" value={values.startDate} onChange={handleInputChange} error={errors.startDate} />
-				<Select
-					name="department"
-					label="Department"
-					value={values.department}
-					onChange={handleInputChange}
-					options={getDepartments()}
-					error={errors.department}
-				/>
-			</Box>
-			<Box
-				sx={{
-					textAlign: "right",
-					padding: "15px",
-				}}>
-				<Button text="Save" type="submit" />
-				<Button text="Reset" variant="outlined" onClick={resetForm} />
-			</Box>
-		</Form>
+			</Form>
+			<Modal title="Succés !" onValidate={() => setShowModal(false)} show={showModal}>
+				L&lsquo;utilisateur a bien été enregistré !
+			</Modal>
+		</>
 	);
 }

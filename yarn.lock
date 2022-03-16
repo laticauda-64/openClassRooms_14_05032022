@@ -768,6 +768,11 @@ convert-source-map@^1.7.0:
   dependencies:
     safe-buffer "~5.1.1"
 
+core-js@^3.21.1:
+  version "3.21.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
+  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
+
 cross-spawn@^7.0.2:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
@@ -1637,6 +1642,15 @@ optionator@^0.9.1:
     prelude-ls "^1.2.1"
     type-check "^0.4.0"
     word-wrap "^1.2.3"
+
+p14-modal-component@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/p14-modal-component/-/p14-modal-component-0.1.7.tgz#dd7602d4c9d04186e3bba1292ab361674c12ca09"
+  integrity sha512-hf6Sr+DDwYPbMN38gyK+8SZSlk12FjqbRfRs1vALP1JwpgxCsCmKkZvCkkusBwSMDP4p0orpYxjNtB1az7Ielw==
+  dependencies:
+    core-js "^3.21.1"
+    react-transition-group "^4.4.2"
+    styled-components "^5.3.3"
 
 parent-module@^1.0.0:
   version "1.0.1"
