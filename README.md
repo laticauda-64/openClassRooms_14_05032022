@@ -99,3 +99,42 @@ Comme promis, un peu plus tard dans la journée, Jade vous envoie le mail suivan
 > **Jade**
 
 Ça y est, vous avez toutes les informations dont vous avez besoin. Maintenant, le plus dur sera de choisir quel plugin jQuery convertir !
+
+## Getting started
+
+This project was made with [Vite.js](https://vitejs.dev/). You don't know Vite ? Ok it's the same purpose than traditionnal "Create React App" but with huge enhancements, ([See here](https://medium.com/codex/you-should-choose-vite-over-cra-for-react-apps-heres-why-47e2e7381d13)), and it was made by [Evan You](https://evanyou.me/).
+
+You will need some dependencies for running this project :
+
+-   React (17.0.2)
+-   Redux Toolkit (1.8.0)
+-   React Redux (7.2.6)
+-   Redux Persist (6.0.0)
+-   Styled-components: (5.3.3)
+-   @mui/icons-material: (^5.4.4),
+-   @mui/lab: (^5.0.0-alpha.72),
+-   @mui/materia": (^5.4.4),
+-   @mui/styled-engine-sc: (^5.4.2),
+-   @reduxjs/toolkit: (^1.8.0),
+-   date-fns: (^2.28.0)
+-   [p14-modal-component: (^0.1.7)](https://www.npmjs.com/package/p14-modal-component) (This is my custom plugin)
+
+Also, i assume that you will use NodeJS at version 16 or more.
+
+## Installation :
+
+Just run usual commands to get the needed dependecies  
+`npm install or yarn`
+
+## Scripts :
+
+Launch the app in developpement mode  
+`npm run dev or yarn dev`  
+Project is being served on port 3010 (cause backend is using 3000) but you can change that in vite.config.js file.
+
+Make the final build for serve in production  
+`npm run build or yarn build`  
+Output files goes in the 'dist' folder with usual optimisations (js bundling, css minifying, etc...)
+
+Locally preview production build  
+`npm run preview or yarn preview`
